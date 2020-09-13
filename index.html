@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="index.css">
+
+    <title>Actividad vueJS</title>
+  </head>
+  <body>
+    <div id="app">
+    <!--Barra de navegacion-->
+    <nav class="navbar navbar-expand-md custom-nav">
+        <div class="d-flex w-50 order-0">
+            <a class="navbar-brand mr-1" ></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+        <div class="navbar-collapse collapse justify-content-center order-2" id="collapsingNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item active" >
+                    <a v-on:click="current = 'home'" class="nav-link"  >Home</a>
+                </li>
+                <li class="nav-item" >
+                    <a v-on:click="current = 'projects'" class="nav-link">Projects</a>
+                </li>
+                <li class="nav-item" >
+                    <a v-on:click="current = 'services'" class="nav-link">Services</a>
+                </li>
+                <li class="nav-item" >
+                    <a v-on:click="current = 'contacts'" class="nav-link">Contact</a>
+                </li>
+            </ul>
+        </div>
+        <span class="navbar-text small text-truncate mt-1 w-50 text-right order-1 order-md-last"></span>
+    </nav>
+      
+        <div class="center">
+            <div style="color:#1a82ab" v-if="current == 'home'">You chose <span style="background-color:#1a82ab;color:white;padding:5px">HOME</span></div>
+
+            <div class="services" v-else-if="current == 'services'">
+                <h2 style="color:white;padding:10px;text-align:center;">Services</h2>
+                <div class="services-container">
+                    <ul>
+                        <li v-on:click="updateCart" value="300">Web Development <span style="margin-left:3em;">300</span></li>
+                        <li v-on:click="updateCart" value="400">Design <span style="margin-left:8em;">400</span></li>
+                        <li v-on:click="updateCart" value="250">Integration <span style="margin-left:6em;">250</span></li>
+                        <li v-on:click="updateCart" value="250">Training <span style="margin-left:7.5em;">250</span></li>
+                    </ul>
+                    <hr>
+                    <p style="color:white">Total: <span style="margin-left:9em;color:black">{{cart}}</span></p>
+                    </div>
+                </div>
+            <div class="projects" v-else-if="current == 'projects'">
+                <section id="js-grid-list" class="grid-list" v-cloak>
+                <div class="tool-bar">
+                    <!-- These link buttons use Vue.js to bind click events to change the "layout" variable and bind an active class -->
+                    <a class="list-icon" v-on:click="layout = 'list'" v-bind:class="{ 'active': layout == 'list'}" title="List"></a>
+                    <a class="grid-icon" v-on:click="layout = 'grid'" v-bind:class="{ 'active': layout == 'grid'}" title="Grid"></a>
+                </div>
+            
+                <!-- Vue.js lets us choose which UL to show depending on the "layout" variable -->
+                
+                <ul v-if="layout === 'grid'" class="grid">
+                    <!-- A "grid" view with photos only -->
+                    <li v-for="blog in blog_posts">
+                        <a v-bind:href="blog.url" v-bind:style="{ backgroundImage: 'url(' + blog.image.large + ')' }" target="_blank"></a>
+                    </li>
+                </ul>
+            
+                <ul v-if="layout === 'list'" class="list">
+                    <!-- A "list" view with small photos and blog titles -->
+                    <li v-for="blog in blog_posts">
+                        <a v-bind:href="blog.url" target="_blank">
+                            <img v-bind:src="blog.image.small">
+                            <p>{{blog.title}}</p>
+                        </a>
+                    </li>
+                </ul>
+                </section>
+            
+            </div>
+            <div class="contact" v-else style="color:#1a82ab">You chose <span style="background-color:#1a82ab;color:white;padding:5px">CONTACT</span></div>
+            
+        </div>
+
+
+
+      
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  </body>
+</html>
